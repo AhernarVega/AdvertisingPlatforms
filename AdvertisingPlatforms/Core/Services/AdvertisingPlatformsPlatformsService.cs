@@ -1,19 +1,24 @@
-﻿namespace AdvertisingPlatforms.Core.Services;
+﻿using AdvertisingPlatforms.Infrastructure.Persistence;
+
+namespace AdvertisingPlatforms.Core.Services;
 
 public class AdvertisingPlatformsPlatformsService
 {
-    // TODO: объявление необходимых зависимостей
+    private readonly IAdPlatformsReader _adPlatformsReader;
+    // Допустил, что могу хранить in-memory коллекцию в сервисах,
+    // поскольку логика фильтрации происходит в сервисе,
+    // то выделение класса просто под хранение одной коллекции в данному случе излишне
+    private Dictionary<string, List<string>> _adPlatforms;
     
-    public AdvertisingPlatformsPlatformsService()
+    public AdvertisingPlatformsPlatformsService(IAdPlatformsReader adPlatformsReader)
     {
-        // TODO: инициализация необходимых зависимостей
+        _adPlatformsReader = adPlatformsReader;
+        _adPlatforms = [];
     }
 
-    public async Task<List<string>> LoadingAdPlatformsFromFileAsync()
+    public async Task LoadingAdPlatformsFromFileAsync()
     {
-        // TODO: изменить возвращаемый тип на список рекламных площадок
-        // TODO: реализовать загрузку списка рекламных площадок
-        return [];
+        _adPlatforms = await _adPlatformsReader.LoadAdPlatformsAsync();
     }
 
     public async Task<List<string>> FindAdPlatformsByLocationAsync(string location)
