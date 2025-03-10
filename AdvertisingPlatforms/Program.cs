@@ -2,12 +2,14 @@ using AdvertisingPlatforms.Infrastructure.Persistence;
 
 namespace AdvertisingPlatforms;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
+        
+        builder.Services.AddTransient<IAdPlatformsReader, AdPlatformsReader>();
+        
         builder.Services.AddControllers();
         
         builder.Services.AddEndpointsApiExplorer();
