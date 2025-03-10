@@ -15,7 +15,7 @@ public class AdvertisingPlatformsController : ControllerBase
 
     [Route("ad_platforms_from_file")]
     [HttpGet]
-    public async Task<ActionResult> LoadingAdPlatformsFromFile()
+    public async Task<ActionResult> LoadingAdPlatformsFromFileAsync()
     {
         // TODO: вызов сервиса для загрузки данных о рекламных
         return Ok();
@@ -23,7 +23,7 @@ public class AdvertisingPlatformsController : ControllerBase
 
     [Route("ad_platforms/{location}")]
     [HttpGet]
-    public async Task<ActionResult> FindAdPlatformsByLocation(string location)
+    public async Task<ActionResult> FindAdPlatformsByLocationAsync(string location)
     {
         // TODO: вызов сервиса для поиска рекламных площадок по локации
         return Ok();
