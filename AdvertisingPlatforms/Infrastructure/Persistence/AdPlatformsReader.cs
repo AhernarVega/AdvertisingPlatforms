@@ -1,6 +1,6 @@
 ﻿namespace AdvertisingPlatforms.Infrastructure.Persistence;
 
-public class AdPlatformsReader
+public class AdPlatformsReader : IAdPlatformsReader
 {
     public async Task<Dictionary<string, List<string>>> LoadAdPlatformsAsync(string pathToFile = "")
     {
