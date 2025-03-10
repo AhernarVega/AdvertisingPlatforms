@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="API\Controllers\" />
       <Folder Include="Contracts\" />
       <Folder Include="Domain\" />
       <Folder Include="Persistense\" />
