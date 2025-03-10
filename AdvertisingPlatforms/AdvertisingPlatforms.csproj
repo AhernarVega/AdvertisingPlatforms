@@ -11,7 +11,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+      <Folder Include="API\Controllers\" />
+      <Folder Include="Contracts\" />
+      <Folder Include="Domain\" />
+      <Folder Include="Persistense\" />
+      <Folder Include="Services.Abstractions\" />
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>
