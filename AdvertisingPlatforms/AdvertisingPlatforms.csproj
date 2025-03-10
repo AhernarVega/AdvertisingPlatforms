@@ -14,7 +14,7 @@
       <Folder Include="Core\Contracts\" />
       <Folder Include="Core\Domain\" />
       <Folder Include="Core\Services.Abstractions\" />
-      <Folder Include="Infrastructure\Persistense\" />
+      <Folder Include="Infrastructure\Persistence\" />
       <Folder Include="Presentation\" />
     </ItemGroup>
 
