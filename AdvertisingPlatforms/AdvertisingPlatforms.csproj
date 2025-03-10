@@ -11,11 +11,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contracts\" />
-      <Folder Include="Domain\" />
-      <Folder Include="Persistense\" />
-      <Folder Include="Services.Abstractions\" />
-      <Folder Include="Services\" />
+      <Folder Include="Core\Contracts\" />
+      <Folder Include="Core\Domain\" />
+      <Folder Include="Core\Services.Abstractions\" />
+      <Folder Include="Core\Services\" />
+      <Folder Include="Infrastructure\Persistense\" />
+      <Folder Include="Presentation\" />
     </ItemGroup>
 
 </Project>

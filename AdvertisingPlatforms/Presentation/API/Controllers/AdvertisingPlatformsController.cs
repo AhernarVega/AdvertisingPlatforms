@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AdvertisingPlatforms.API.Controllers;
+namespace AdvertisingPlatforms.Presentation.API.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
