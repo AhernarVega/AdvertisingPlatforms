@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdvertisingPlatforms.Core.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdvertisingPlatforms.Presentation.API.Controllers;
 
@@ -6,26 +7,25 @@ namespace AdvertisingPlatforms.Presentation.API.Controllers;
 [ApiController]
 public class AdvertisingPlatformsController : ControllerBase
 {
-    // TODO: прописать используемые сервисы
+    private readonly IAdvertisingPlatformsService _service;
     
-    public AdvertisingPlatformsController()
+    public AdvertisingPlatformsController(IAdvertisingPlatformsService service)
     {
-        // TODO: инициализировать сервисы
+        _service = service;
     }
 
     [Route("ad_platforms_from_file")]
     [HttpGet]
     public async Task<ActionResult> LoadingAdPlatformsFromFileAsync()
     {
-        // TODO: вызов сервиса для загрузки данных о рекламных
+        await _service.LoadingAdPlatformsFromFileAsync();
         return Ok();
     }
 
     [Route("ad_platforms/{location}")]
     [HttpGet]
-    public async Task<ActionResult> FindAdPlatformsByLocationAsync(string location)
+    public ActionResult FindAdPlatformsByLocationAsync(string location)
     {
-        // TODO: вызов сервиса для поиска рекламных площадок по локации
-        return Ok();
+        return Ok(_service.FindAdPlatformsByLocation(location)) ;
     }
 }

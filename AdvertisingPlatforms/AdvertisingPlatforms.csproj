@@ -12,7 +12,6 @@
 
     <ItemGroup>
       <Folder Include="Core\Contracts\" />
-      <Folder Include="Core\Services.Abstractions\" />
       <Folder Include="Presentation\" />
     </ItemGroup>
 
