@@ -23,8 +23,15 @@ public class AdvertisingPlatformsPlatformsService
 
     public async Task<List<string>> FindAdPlatformsByLocationAsync(string location)
     {
-        // TODO: изменить возвращаемый тип на список рекламных площадок
-        // TODO: реализовать получение списка рекламных площадок для заданной локации
+        while (!string.IsNullOrEmpty(location))
+        {
+            if (_adPlatforms.TryGetValue(location, out var values))
+            {
+                return values.ToList();
+            }
+
+            location = location[..location.LastIndexOf('/')];
+        }
         return [];
     }
 }
