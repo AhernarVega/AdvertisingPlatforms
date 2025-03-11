@@ -2,5 +2,5 @@
 
 public interface IAdPlatformsReader
 {
-    public Task<Dictionary<string, List<string>>> LoadAdPlatformsAsync(string pathToFile = "");
+    public Task<Dictionary<string, HashSet<string>>> LoadAdPlatformsAsync(string pathToFile = "");
 }
