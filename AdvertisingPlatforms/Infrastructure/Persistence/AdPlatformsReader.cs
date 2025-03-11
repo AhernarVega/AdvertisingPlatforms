@@ -1,4 +1,6 @@
-﻿namespace AdvertisingPlatforms.Infrastructure.Persistence;
+﻿using AdvertisingPlatforms.Core.Domain.PersistenceContracts;
+
+namespace AdvertisingPlatforms.Infrastructure.Persistence;
 
 public class AdPlatformsReader : IAdPlatformsReader
 {
@@ -42,7 +44,7 @@ public class AdPlatformsReader : IAdPlatformsReader
     public async Task<Dictionary<string, HashSet<string>>> LoadAdPlatformsAsync(string pathToFile = "")
     {
         pathToFile = string.IsNullOrEmpty(pathToFile)
-            ? Path.GetFullPath(Directory.GetCurrentDirectory(), "wwwroot\\AdPlatforms.txt")
+            ? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\AdPlatforms.txt")
             : pathToFile;
 
         if (!File.Exists(pathToFile))
@@ -75,7 +77,6 @@ public class AdPlatformsReader : IAdPlatformsReader
                                    $"of the advertising platform is missing");
                 continue;
             }
-            checkPlatforms.Add(adPlatform);
 
             var locations = line[(colonIndex + 1)..]
                 .Split(',')
@@ -94,6 +95,7 @@ public class AdPlatformsReader : IAdPlatformsReader
                 _logger.LogWarning($"{lines}: The ad platform {adPlatform} is already registered");
                 continue;
             }
+            checkPlatforms.Add(adPlatform);
 
             if (checkLocations.Any(x => locations.Contains(x)))
             {

@@ -1,4 +1,4 @@
-﻿namespace AdvertisingPlatforms.Infrastructure.Persistence;
+﻿namespace AdvertisingPlatforms.Core.Domain.PersistenceContracts;
 
 public interface IAdPlatformsReader
 {

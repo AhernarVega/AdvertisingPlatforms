@@ -1,31 +1,31 @@
-﻿using AdvertisingPlatforms.Infrastructure.Persistence;
+﻿using AdvertisingPlatforms.Core.Domain.PersistenceContracts;
 
 namespace AdvertisingPlatforms.Core.Services;
 
 public class AdvertisingPlatformsService : IAdvertisingPlatformsService
 {
     private readonly IAdPlatformsReader _adPlatformsReader;
-    // Допустил, что могу хранить in-memory коллекцию в сервисах,
-    // поскольку логика фильтрации происходит в сервисе,
-    // то выделение класса просто под хранение одной коллекции в данному случе излишне
-    private Dictionary<string, HashSet<string>> _adPlatforms;
+    private readonly IDataStorage _dataStorage;
     
-    public AdvertisingPlatformsService(IAdPlatformsReader adPlatformsReader)
+    public AdvertisingPlatformsService(IAdPlatformsReader adPlatformsReader, IDataStorage dataStorage)
     {
         _adPlatformsReader = adPlatformsReader;
-        _adPlatforms = [];
+        _dataStorage = dataStorage;
     }
 
     public async Task LoadingAdPlatformsFromFileAsync()
     {
-        _adPlatforms = await _adPlatformsReader.LoadAdPlatformsAsync();
+        _dataStorage.UpdateData(await _adPlatformsReader.LoadAdPlatformsAsync());
     }
 
     public List<string> FindAdPlatformsByLocation(string location)
     {
+        var data = _dataStorage.GetAdPlatforms();
+        location = location.Replace("%2F", "/");
+        
         while (!string.IsNullOrEmpty(location))
         {
-            if (_adPlatforms.TryGetValue(location, out var values))
+            if (data.TryGetValue(location, out var values))
             {
                 return values.ToList();
             }
