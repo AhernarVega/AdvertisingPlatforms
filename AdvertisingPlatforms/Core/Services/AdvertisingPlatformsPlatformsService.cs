@@ -8,7 +8,7 @@ public class AdvertisingPlatformsPlatformsService
     // Допустил, что могу хранить in-memory коллекцию в сервисах,
     // поскольку логика фильтрации происходит в сервисе,
     // то выделение класса просто под хранение одной коллекции в данному случе излишне
-    private Dictionary<string, List<string>> _adPlatforms;
+    private Dictionary<string, HashSet<string>> _adPlatforms;
     
     public AdvertisingPlatformsPlatformsService(IAdPlatformsReader adPlatformsReader)
     {
