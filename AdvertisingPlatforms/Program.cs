@@ -9,6 +9,7 @@ public static class Program
         var builder = WebApplication.CreateBuilder(args);
         
         builder.Services.AddTransient<IAdPlatformsReader, AdPlatformsReader>();
+        builder.Services.AddLogging();
         
         builder.Services.AddControllers();
         
