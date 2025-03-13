@@ -23,24 +23,21 @@ public static class Program
             options.AddConsole();
             options.AddDebug();
         });
-        
+
         builder.Services.AddControllers();
-        
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<IValidator<string>, LocationRequestValidator>();
-        
+
         var app = builder.Build();
-        
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseMiddleware<CustomExceptionMiddleware>();
-        
+
         app.MapControllers();
 
         app.Run();
