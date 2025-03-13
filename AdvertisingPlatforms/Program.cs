@@ -30,9 +30,11 @@ public static class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<IValidator<string>, LocationRequestValidator>();
-
+        
         var app = builder.Build();
-
+        
+        app.UseHttpsRedirection();
+        
         app.UseSwagger();
         app.UseSwaggerUI();
 
