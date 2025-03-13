@@ -1,4 +1,5 @@
 ﻿using AdvertisingPlatforms.Core.Domain.PersistenceContracts;
+using AdvertisingPlatforms.Core.Services.Abstractions;
 
 namespace AdvertisingPlatforms.Core.Services;
 
@@ -21,7 +22,6 @@ public class AdvertisingPlatformsService : IAdvertisingPlatformsService
     public List<string> FindAdPlatformsByLocation(string location)
     {
         var data = _dataStorage.GetAdPlatforms();
-        location = location.Replace("%2F", "/");
         
         while (!string.IsNullOrEmpty(location))
         {
