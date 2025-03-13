@@ -1,4 +1,4 @@
-﻿namespace AdvertisingPlatforms.Core.Services;
+﻿namespace AdvertisingPlatforms.Core.Services.Abstractions;
 
 public interface IAdvertisingPlatformsService
 {
