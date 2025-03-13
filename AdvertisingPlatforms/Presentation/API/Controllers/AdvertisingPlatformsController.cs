@@ -1,4 +1,5 @@
-﻿using AdvertisingPlatforms.Core.Services.Abstractions;
+﻿using System.Runtime.InteropServices;
+using AdvertisingPlatforms.Core.Services.Abstractions;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +20,9 @@ public class AdvertisingPlatformsController : ControllerBase
 
     [Route("load_ad_platforms_from_file")]
     [HttpPost]
-    public async Task<ActionResult> LoadingAdPlatformsFromFileAsync()
+    public async Task<ActionResult> LoadingAdPlatformsFromFileAsync(string? pathToFile)
     {
-        await _service.LoadingAdPlatformsFromFileAsync();
+        await _service.LoadingAdPlatformsFromFileAsync(pathToFile);
         return Ok();
     }
 

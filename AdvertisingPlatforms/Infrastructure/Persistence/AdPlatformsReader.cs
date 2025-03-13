@@ -42,7 +42,7 @@ public partial class AdPlatformsReader : IAdPlatformsReader
         return result;
     }
 
-    public async Task<Dictionary<string, HashSet<string>>> LoadAdPlatformsAsync(string pathToFile = "")
+    public async Task<Dictionary<string, HashSet<string>>> LoadAdPlatformsAsync(string? pathToFile)
     {
         pathToFile = string.IsNullOrEmpty(pathToFile)
             ? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\AdPlatforms.txt")

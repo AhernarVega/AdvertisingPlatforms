@@ -2,6 +2,6 @@
 
 public interface IAdvertisingPlatformsService
 {
-    public Task LoadingAdPlatformsFromFileAsync();
+    public Task LoadingAdPlatformsFromFileAsync(string? pathToFile);
     public List<string> FindAdPlatformsByLocation(string location);
 }

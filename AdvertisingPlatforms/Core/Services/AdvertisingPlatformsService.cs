@@ -14,9 +14,9 @@ public class AdvertisingPlatformsService : IAdvertisingPlatformsService
         _dataStorage = dataStorage;
     }
 
-    public async Task LoadingAdPlatformsFromFileAsync()
+    public async Task LoadingAdPlatformsFromFileAsync(string? pathToFile)
     {
-        _dataStorage.UpdateData(await _adPlatformsReader.LoadAdPlatformsAsync());
+        _dataStorage.UpdateData(await _adPlatformsReader.LoadAdPlatformsAsync(pathToFile));
     }
 
     public List<string> FindAdPlatformsByLocation(string location)
