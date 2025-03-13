@@ -1,21 +1,24 @@
-﻿using AdvertisingPlatforms.Core.Services;
+﻿using AdvertisingPlatforms.Core.Services.Abstractions;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdvertisingPlatforms.Presentation.API.Controllers;
 
-[Route("api/v1/[controller]")]
+[Route("api/v1/advertising_platforms")]
 [ApiController]
 public class AdvertisingPlatformsController : ControllerBase
 {
     private readonly IAdvertisingPlatformsService _service;
-    
-    public AdvertisingPlatformsController(IAdvertisingPlatformsService service)
+    private readonly IValidator<string> _validator;
+
+    public AdvertisingPlatformsController(IAdvertisingPlatformsService service, IValidator<string> validator)
     {
         _service = service;
+        _validator = validator;
     }
 
-    [Route("ad_platforms_from_file")]
-    [HttpGet]
+    [Route("load_ad_platforms_from_file")]
+    [HttpPost]
     public async Task<ActionResult> LoadingAdPlatformsFromFileAsync()
     {
         await _service.LoadingAdPlatformsFromFileAsync();
@@ -26,6 +29,18 @@ public class AdvertisingPlatformsController : ControllerBase
     [HttpGet]
     public ActionResult FindAdPlatformsByLocationAsync(string location)
     {
-        return Ok(_service.FindAdPlatformsByLocation(location)) ;
+        // Если используется Swagger
+        location = location.Replace("%2F", "/");
+        
+        var result = _validator.Validate(location);
+        if (result.IsValid)
+        {
+            return Ok(_service.FindAdPlatformsByLocation(location));
+        }
+
+        var answer = result.Errors.Aggregate(string.Empty, 
+            (current, validationResult) => current + (validationResult.ErrorMessage + "\n"));
+
+        return BadRequest(answer);
     }
 }
