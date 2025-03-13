@@ -1,4 +1,15 @@
 ﻿Яндекс.Директ: /ru
 Ревдинский рабочий: /ru/svrd/revda, /ru/svrd/pervik
-Газета уральских москвичей: /ru/msk, /ru/permobl,/ru/chelobl
+Газета уральских москвичей: /ru/msk, /ru/permobl, /ru/chelobl
 Крутая реклама: /ru/svrd
+А: /com/web/b, /net/web/a
+B: /com/test/r1, /com/test/r2, /com/test/r3
+C: /com/qweb
+D: /net
+E: /net/src/root/abc, /com/src/qrt
+G: /jap/quot/1, /jap/quot/2
+H: /net/repo, net/qumo/sept
+I: /com
+J: /com/web
+: /123
+WrongData /some
