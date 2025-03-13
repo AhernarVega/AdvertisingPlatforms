@@ -1,8 +1,9 @@
-﻿using AdvertisingPlatforms.Core.Domain.PersistenceContracts;
+﻿using System.Text.RegularExpressions;
+using AdvertisingPlatforms.Core.Domain.PersistenceContracts;
 
 namespace AdvertisingPlatforms.Infrastructure.Persistence;
 
-public class AdPlatformsReader : IAdPlatformsReader
+public partial class AdPlatformsReader : IAdPlatformsReader
 {
     private readonly ILogger<string> _logger;
 
@@ -63,18 +64,30 @@ public class AdPlatformsReader : IAdPlatformsReader
         while (await reader.ReadLineAsync() is { } line)
         {
             ++lines;
+
+            if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
+            {
+                continue;
+            }
+            
+            var regex = CheckPlatformLocationRegex();
+            if (!regex.Match(line).Success)
+            {
+                _logger.LogWarning($"{lines}: The string had an incorrect format. Expected format:" +
+                                   $" [PlatformName]: [/location1], [/location2], .. [/locationN]");
+            }
+            
             var colonIndex = line.IndexOf(':');
             if (colonIndex == -1)
             {
-                _logger.LogWarning($"{lines}: The string has an incorrect format, the \":\" is missing");
+                _logger.LogWarning("The \":\" is missing");
                 continue;
             }
 
             var adPlatform = line[..colonIndex];
             if (string.IsNullOrEmpty(adPlatform))
             {
-                _logger.LogWarning($"{lines}: The string has an incorrect format and the name " +
-                                   $"of the advertising platform is missing");
+                _logger.LogWarning("Name of the advertising platform is missing");
                 continue;
             }
 
@@ -83,26 +96,31 @@ public class AdPlatformsReader : IAdPlatformsReader
                 .Select(x => x.Trim())
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList();
-            
+
             if (locations.Count == 0)
             {
-                _logger.LogWarning($"{lines}: The string has an incorrect format, and the site locations are missing");
+                _logger.LogWarning("Site locations are missing");
                 continue;
             }
-            
+
             if (checkPlatforms.Contains(adPlatform))
             {
-                _logger.LogWarning($"{lines}: The ad platform {adPlatform} is already registered");
+                _logger.LogWarning("{lines}: The ad platform {adPlatform} is already registered", lines, adPlatform);
                 continue;
             }
+
             checkPlatforms.Add(adPlatform);
 
-            if (checkLocations.Any(x => locations.Contains(x)))
+            var registeredLocation = checkLocations.Intersect(locations).ToList();
+            if (registeredLocation.Count != 0)
             {
-                _logger.LogWarning($"{lines}: The ad platform {adPlatform} is already registered");
+                foreach (var location in registeredLocation)
+                {
+                    _logger.LogWarning("{lines}: The location {location} is already registered", lines, location);
+                }
                 continue;
             }
-            
+
             foreach (var location in locations)
             {
                 checkLocations.Add(location);
@@ -120,4 +138,7 @@ public class AdPlatformsReader : IAdPlatformsReader
 
         return processedAdPlatforms;
     }
+
+    [GeneratedRegex(@"^\s*([А-Яа-я\s\w._-]+)\s*:\s*((/([\w_-],\s+|[\w_-])+)+\s*)$")]
+    private static partial Regex CheckPlatformLocationRegex();
 }
