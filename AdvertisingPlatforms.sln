@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisingPlatforms", "Adv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{8A06BC72-4CC4-4988-978E-9461FFD67A48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisingPlatforms.Tests", "AdvertisingPlatforms.Tests\AdvertisingPlatforms.Tests.csproj", "{DCE2CD07-C4EE-45F8-8C95-4FCE6E3F8D4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{8A06BC72-4CC4-4988-978E-9461FFD67A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A06BC72-4CC4-4988-978E-9461FFD67A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A06BC72-4CC4-4988-978E-9461FFD67A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCE2CD07-C4EE-45F8-8C95-4FCE6E3F8D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE2CD07-C4EE-45F8-8C95-4FCE6E3F8D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE2CD07-C4EE-45F8-8C95-4FCE6E3F8D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE2CD07-C4EE-45F8-8C95-4FCE6E3F8D4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
