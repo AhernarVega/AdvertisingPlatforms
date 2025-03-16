@@ -12,25 +12,25 @@ public partial class AdPlatformsReader : IAdPlatformsReader
         _logger = logger;
     }
 
-    private IEnumerable<string> GetParentKeys(string key)
+    private IEnumerable<string> GetParentLocations(string sourcePlatforms)
     {
-        var parts = key.Split('/');
+        var parts = sourcePlatforms.Split('/');
         return Enumerable
             .Range(1, parts.Length - 1)
             .Select(i => string.Join("/", parts.Take(i)));
     }
 
-    private Dictionary<string, HashSet<string>> ProcessDictionary(Dictionary<string, HashSet<string>> dict)
+    private Dictionary<string, HashSet<string>> ProcessDictionary(Dictionary<string, HashSet<string>> sourceData)
     {
         var result = new Dictionary<string, HashSet<string>>();
 
-        foreach (var key in dict.Keys)
+        foreach (var key in sourceData.Keys)
         {
-            var values = new HashSet<string>(dict[key]);
+            var values = new HashSet<string>(sourceData[key]);
 
-            foreach (var parentKey in GetParentKeys(key))
+            foreach (var parentKey in GetParentLocations(key))
             {
-                if (dict.TryGetValue(parentKey, out var parentValues))
+                if (sourceData.TryGetValue(parentKey, out var parentValues))
                 {
                     values.UnionWith(parentValues);
                 }
