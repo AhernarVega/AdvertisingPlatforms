@@ -3,6 +3,9 @@ using AdvertisingPlatforms.Presentation.Dtos.Responses;
 
 namespace AdvertisingPlatforms.Presentation.Middlewares;
 
+/// <summary>
+/// Ручной middleware для обработки исключений
+/// </summary>
 public class CustomExceptionMiddleware
 {
     private readonly RequestDelegate _next;

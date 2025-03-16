@@ -22,6 +22,7 @@ public class AdvertisingPlatformsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> LoadingAdPlatformsFromFileAsync(string? pathToFile)
     {
+        // Асинхронная загрузка словаря из файла с платформами и их локациями 
         await _service.LoadingAdPlatformsFromFileAsync(pathToFile);
         return Ok();
     }
@@ -33,12 +34,14 @@ public class AdvertisingPlatformsController : ControllerBase
         // Если используется Swagger
         location = location.Replace("%2F", "/");
         
+        // Валидирование указанной локации
         var result = _validator.Validate(location);
         if (result.IsValid)
         {
             return Ok(_service.FindAdPlatformsByLocation(location));
         }
 
+        // Формирование ответа в случае неуспешной валидации
         var answer = result.Errors.Aggregate(string.Empty, 
             (current, validationResult) => current + (validationResult.ErrorMessage + "\n"));
 
